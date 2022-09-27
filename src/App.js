@@ -5,12 +5,19 @@ export default function App() {
   const [isLoading, setIsLoading] = useState(true);
   const [dataUrl, setDataUrl] = useState(null);
   const [error, setError] = useState(null);
+
+  const API_URL =`${process.env.REACT_APP_API_URL}`;
+  const API_KEY =`${process.env.REACT_APP_API_KEY}`;
+
   useEffect(() => {
     if (isLoading) {
       async function fetchData() {
         try {
           const response = await fetch(
-            "https://opendata.aemet.es/opendata/api/observacion/convencional/datos/estacion/0016A?api_key=eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJyb2RyaWdvLmNhcnZhbGhvQGVsc2FtZXguY29tIiwianRpIjoiYzhjZjNiYTgtM2RkOS00N2VkLWE0NDYtY2EwOGU2NmU1YWViIiwiaXNzIjoiQUVNRVQiLCJpYXQiOjE2NjM4NDUwNjUsInVzZXJJZCI6ImM4Y2YzYmE4LTNkZDktNDdlZC1hNDQ2LWNhMDhlNjZlNWFlYiIsInJvbGUiOiIifQ.iOapwmp1NKUBS7PACOwk__W8GykN3REkMFBwj8Bu6rs"
+            `${API_URL}0016A?api_key=${API_KEY}`, {
+              method: 'GET',
+              headers: { "Content-Type": "application/json"}
+            }
           );
           if (response.ok) {
             const data = await response.json();
@@ -26,10 +33,14 @@ export default function App() {
       }
       fetchData();
     }
-  }, [isLoading]);
+  }, [isLoading, API_KEY, API_URL]);
+
+
   const refreshData = () => {
     setIsLoading(true);
   };
+
+
   if (error) {
     return (
       <div className="App">

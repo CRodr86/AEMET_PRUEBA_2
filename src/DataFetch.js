@@ -14,8 +14,8 @@ const DataFetch = (props) => {
         });
         if (response.ok) {
           const data = await response.json();
-          setApiData(data);
-          console.log(data);
+          setApiData(data[data.length-1]);
+          console.log(data[0]);
           setError(null);
         } else {
           setError("Hubo un error al obtener la petición");
@@ -36,7 +36,7 @@ const DataFetch = (props) => {
   }
   return (
     <div className="DataFetch">
-        <p>{JSON.stringify(apiData)}</p>
+        <p>{apiData.ta}</p>
     </div>
   )
 };

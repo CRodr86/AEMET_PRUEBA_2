@@ -41,7 +41,7 @@ const DataFetch = (props) => {
         <li>Altitud: {apiData.alt} m</li>
         <li>Precipitación última hora: {apiData.prec} mm</li>
         <li>Velocidad del viento: {apiData.vv} m/s</li>
-        <li>Dirección del viento: {apiData.dv}</li>
+        <li>Dirección del viento: {apiData.dv}<sup>o</sup></li>
         <li>Temperatura del suelo: {apiData.ts} <sup>o</sup>C</li>
         <li>Temperatura del aire: {apiData.ta} <sup>o</sup>C</li>        
       </ul>

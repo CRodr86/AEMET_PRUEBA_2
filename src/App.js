@@ -11,8 +11,8 @@ export default function App() {
   const API_URL =`${process.env.REACT_APP_API_URL}`;
   const API_KEY =`${process.env.REACT_APP_API_KEY}`;
 
-  const submitHandler = (e) => {
-    e.preventDefault();
+  const submitHandler = () => {
+ 
     setIdemaCode(`${idema}`);
     setIdema("");
     setIsLoading(true);
@@ -66,7 +66,8 @@ export default function App() {
     <div className="App">
       <form onSubmit={submitHandler}>
         <label htmlFor="idemaCode">Código IDEMA</label>
-        <input type="text" id="idema" value={idema} onChange={changeHandler}/>
+        <input type="text" id="idema" value={idema} onChange={changeHandler} autofocus="true"/>
+        <button type="submit">Buscar</button>
       </form>
       <p>{idemaCode}</p>
       <DataFetch url={dataUrl}/>

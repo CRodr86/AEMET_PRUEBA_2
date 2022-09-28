@@ -21,7 +21,7 @@ const DataFetch = (props) => {
           setError("Hubo un error al obtener la petición");
         }
       } catch (error) {
-        setError("Datos no encontrados");
+        setError("Insertar código");
       }
     }
     fetchData();

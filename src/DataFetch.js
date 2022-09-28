@@ -21,7 +21,7 @@ const DataFetch = (props) => {
           setError("Hubo un error al obtener la petición");
         }
       } catch (error) {
-        setError("No pudimos hacer la solicitud para obtener los datos");
+        setError("Datos no encontrados");
       }
     }
     fetchData();
@@ -36,7 +36,7 @@ const DataFetch = (props) => {
   }
   return (
     <div className="DataFetch">
-        <p>{apiData.ta}</p>
+        <p>{apiData.ubi}</p>
     </div>
   )
 };

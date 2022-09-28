@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import "./App.css";
+import DataFetch from "./DataFetch";
 
 export default function App() {
   const [isLoading, setIsLoading] = useState(true);
@@ -58,7 +59,7 @@ export default function App() {
   }
   return (
     <div className="App">
-      <p>{dataUrl}</p>
+      <DataFetch url={dataUrl}/>
       <button onClick={refreshData}>
         Refrescar
       </button>

@@ -36,7 +36,15 @@ const DataFetch = (props) => {
   }
   return (
     <div className="DataFetch">
-        <p>{apiData.ubi}</p>
+      <ul>
+        <li>Ubicación: {apiData.ubi}</li>
+        <li>Altitud: {apiData.alt} m</li>
+        <li>Precipitación última hora: {apiData.prec} mm</li>
+        <li>Velocidad del viento: {apiData.vv} m/s</li>
+        <li>Dirección del viento: {apiData.dv}</li>
+        <li>Temperatura del suelo: {apiData.ts} <sup>o</sup>C</li>
+        <li>Temperatura del aire: {apiData.ta} <sup>o</sup>C</li>        
+      </ul>
     </div>
   )
 };

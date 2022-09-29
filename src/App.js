@@ -8,28 +8,31 @@ export default function App() {
   const [error, setError] = useState(null);
   const [idema, setIdema] = useState("");
   const [idemaCode, setIdemaCode] = useState("");
-  const API_URL =`${process.env.REACT_APP_API_URL}`;
-  const API_KEY =`${process.env.REACT_APP_API_KEY}`;
+  const API_URL = `${process.env.REACT_APP_API_URL}`;
+  const API_KEY = `${process.env.REACT_APP_API_KEY}`;
 
   const submitHandler = () => {
- 
     setIdemaCode(`${idema}`);
     setIdema("");
     setIsLoading(true);
-  }
+  };
 
   const changeHandler = (e) => {
-    setIdema(e.target.value)
-  }
+    setIdema(e.target.value);
+  };
 
   useEffect(() => {
     if (isLoading) {
       async function fetchData() {
         try {
           const response = await fetch(
-            `${API_URL}${idemaCode}?api_key=${API_KEY}`, {
-              method: 'GET',
-              headers: { "Content-Type": "application/json"}
+            `${API_URL}${idemaCode}?api_key=${API_KEY}`,
+            {
+              method: "GET",
+              headers: {
+                "Content-Type": "application/json",
+                "cache-control": "no-cache",
+              },
             }
           );
           if (response.ok) {
@@ -66,11 +69,17 @@ export default function App() {
     <div className="App">
       <form onSubmit={submitHandler}>
         <label htmlFor="idemaCode">Código IDEMA</label>
-        <input type="text" id="idema" value={idema} onChange={changeHandler} autofocus="true"/>
+        <input
+          type="text"
+          id="idema"
+          value={idema}
+          onChange={changeHandler}
+          autofocus="true"
+        />
         <button type="submit">Buscar</button>
       </form>
       <p>{idemaCode}</p>
-      <DataFetch url={dataUrl}/>
+      <DataFetch url={dataUrl} />
     </div>
   );
 }

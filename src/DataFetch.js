@@ -10,11 +10,14 @@ const DataFetch = (props) => {
       try {
         const response = await fetch(`${props.url}`, {
           method: "GET",
-          headers: { "Content-Type": "application/json" },
+          headers: {
+            "Content-Type": "application/json",
+            "cache-control": "no-cache",
+          },
         });
         if (response.ok) {
           const data = await response.json();
-          setApiData(data[data.length-1]);
+          setApiData(data[data.length - 1]);
           console.log(data[0]);
           setError(null);
         } else {
@@ -41,16 +44,23 @@ const DataFetch = (props) => {
         <li>Altitud: {apiData.alt} m</li>
         <li>Precipitación última hora: {apiData.prec} mm</li>
         <li>Velocidad del viento: {apiData.vv} m/s</li>
-        <li>Dirección del viento: {apiData.dv}<sup>o</sup></li>
-        <li>Temperatura del suelo: {apiData.ts} <sup>o</sup>C</li>
-        <li>Temperatura del aire: {apiData.ta} <sup>o</sup>C</li>        
+        <li>
+          Dirección del viento: {apiData.dv}
+          <sup>o</sup>
+        </li>
+        <li>
+          Temperatura del suelo: {apiData.ts} <sup>o</sup>C
+        </li>
+        <li>
+          Temperatura del aire: {apiData.ta} <sup>o</sup>C
+        </li>
       </ul>
     </div>
-  )
+  );
 };
 
 DataFetch.propTypes = {
-    url: Proptypes.string
+  url: Proptypes.string,
 };
 
 export default DataFetch;

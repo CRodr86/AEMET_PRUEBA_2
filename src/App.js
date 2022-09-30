@@ -11,6 +11,53 @@ export default function App() {
   const API_URL = `${process.env.REACT_APP_API_URL}`;
   const API_KEY = `${process.env.REACT_APP_API_KEY}`;
 
+  const actualWeather = [
+    "7002Y",
+    "7012C",
+    "7023X",
+    "7026X",
+    "7031X",
+    "7066Y",
+    "7072Y",
+    "7080X",
+    "7096B",
+    "7103Y",
+    "7119B",
+    "7121A",
+    "7127X",
+    "7138B",
+    "7145D",
+    "7158X",
+    "7172X",
+    "7178I",
+    "7195X",
+    "7203A",
+    "7209",
+    "7211B",
+    "7227X",
+    "7237E",
+    "7244X",
+    "7247X",
+    "7250C",
+    "7261X",
+    "7275C",
+  ];
+
+  const especificDayWeather = [
+    "7002Y",
+    "7012C",
+    "7031",
+    "7031X",
+    "7096B",
+    "7119B",
+    "7145D",
+    "7178I",
+    "7209",
+    "7228",
+    "7247X",
+    "7275C",
+  ];
+
   const submitHandler = () => {
     setIdemaCode(`${idema}`);
     setIdema("");

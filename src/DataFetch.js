@@ -11,7 +11,7 @@ const DataFetch = (props) => {
         const response = await fetch(`${props.url}`, {
           method: "GET",
           headers: {
-            "Content-Type": "application/json",
+            "Content-Type": "application/json; charset=utf-8",
             "cache-control": "no-cache",
           },
         });
@@ -40,38 +40,37 @@ const DataFetch = (props) => {
   return (
     <div className="DataFetch">
       <table border={1} width="320px">
-        <tr>
-          <th colSpan={2}>{apiData.ubi}</th>
-        </tr>
-        <tr>
-          <th>Altitud</th>
-          <td>{apiData.alt ? `${apiData.alt} m` : `-`}</td>
-        </tr>
-        <tr>
-          <th>Precipitación última hora</th>
-          <td>{apiData.prec || apiData.prec === 0 ? apiData.prec : `-` }</td>
-        </tr>
-        <tr>
-          <th>Velocidad del viento</th>
-          <td>{apiData.vv ? `${apiData.vv} m/s` : `-`}</td>
-        </tr>
-        <tr>
-          <th>Dirección del viento</th>
-          <td>{apiData.dv ? `${apiData.dv}º` : `-`}
-          </td>
-        </tr>
-        <tr>
-          <th>Temperatura del suelo</th>
-          <td>{apiData.ts ? `${apiData.ts}ºC` : `-`}</td>
-        </tr>
-        <tr>
-          <th>Temperatura del aire</th>
-          <td>{apiData.ta ? `${apiData.ta}ºC` : `-`}</td>
-        </tr>
-        <tr>
-          <th>Humedad relativa</th>
-          <td>{apiData.hr ? `${apiData.hr}%` : `-`}</td>
-        </tr>
+        <thead>
+          <tr>
+            <th colSpan={2}>{apiData.nombre}</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <th>Altitud</th>
+            <td>{apiData.altitud ? `${apiData.altitud} m` : `-`}</td>
+          </tr>
+          <tr>
+            <th>Precipitación diaria</th>
+            <td>{apiData.prec || apiData.prec === 0 ? `${apiData.prec} mm` : `-`}</td>
+          </tr>
+          <tr>
+            <th>Velocidad media del viento</th>
+            <td>{apiData.velmedia ? `${apiData.velmedia} m/s` : `-`}</td>
+          </tr>
+          <tr>
+            <th>Racha máxima del viento</th>
+            <td>{apiData.racha ? `${apiData.racha} m/s` : `-`}</td>
+          </tr>
+          <tr>
+            <th>Temperatura mínima</th>
+            {apiData.tmin ? <td>{apiData.tmin}<sup>o</sup>C</td> : <td>-</td>}
+          </tr>
+          <tr>
+            <th>Temperatura máxima</th>
+            {apiData.tmax ? <td>{apiData.tmax}<sup>o</sup>C</td> : <td>-</td>}
+          </tr>
+        </tbody>
       </table>
     </div>
   );

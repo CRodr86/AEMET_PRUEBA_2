@@ -3,7 +3,7 @@ import "./App.css";
 import DataFetch from "./DataFetch";
 
 export default function App() {
-const actualWeather = [
+  const actualWeather = [
     "código",
     "7002Y",
     "7012C",
@@ -37,6 +37,7 @@ const actualWeather = [
   ];
 
   const especificDayWeather = [
+    "código",
     "7002Y",
     "7012C",
     "7031",
@@ -51,30 +52,41 @@ const actualWeather = [
     "7275C",
   ];
 
+  let maxDate = new Date();                         
+  maxDate.setDate(maxDate.getDate() - 4); 
+  maxDate= maxDate.toISOString().split("T")[0];
+
   const [isLoading, setIsLoading] = useState(false);
   const [dataUrl, setDataUrl] = useState(null);
   const [error, setError] = useState(null);
-  const [idemaCode, setIdemaCode] = useState("");
+  const [idemaCode, setIdemaCode] = useState("7002Y");
+  const [date, setDate] = useState(maxDate);
   const API_URL = `${process.env.REACT_APP_API_URL}`;
   const API_KEY = `${process.env.REACT_APP_API_KEY}`;
-
-  
 
   const handleChange = (e) => {
     setIdemaCode(e.target.value);
     setIsLoading(true);
   };
 
+  const handleDate = (e) => {
+    e.preventDefault();
+    setDate(e.target.value);
+    setIsLoading(true);
+  };
+
+
+
   useEffect(() => {
     if (isLoading) {
       async function fetchData() {
         try {
           const response = await fetch(
-            `${API_URL}${idemaCode}?api_key=${API_KEY}`,
+            `https://opendata.aemet.es/opendata/api/valores/climatologicos/diarios/datos/fechaini/${date}T00%3A00%3A00UTC/fechafin/${date}T23%3A59%3A59UTC/estacion/${idemaCode}?api_key=${API_KEY}`,
             {
               method: "GET",
               headers: {
-                "Content-Type": "application/json",
+                "Content-Type": "application/json; charset=utf-8",
                 "cache-control": "no-cache",
               },
             }
@@ -93,7 +105,7 @@ const actualWeather = [
       }
       fetchData();
     }
-  }, [isLoading, API_KEY, API_URL, idemaCode]);
+  }, [isLoading, API_KEY, API_URL, idemaCode, date]);
 
   if (error) {
     return (
@@ -111,13 +123,20 @@ const actualWeather = [
   }
   return (
     <div className="App">
-      <label htmlFor="idemaCode">Código IDEMA</label>
-      <select id="idema" name="idema" onChange={e => handleChange(e)}>
-        {actualWeather.map((i) => (
-          <option value={i}>{i}</option>
-        ))}
-      </select>
+      <form>
+        <label htmlFor="idemaCode">Código IDEMA</label>
+        <select id="idema" name="idema" onChange={(e) => handleChange(e)}>
+          {especificDayWeather.map((i, key) => (
+            <option value={i} key={key}>
+              {i}
+            </option>
+          ))}
+        </select>
+        <label htmlFor="date">Fecha</label>
+        <input type="date" min="2010-01-01" max={maxDate} onChange={(e) => handleDate(e)} />
+      </form>
       <p>{idemaCode}</p>
+      <p>{date}</p>
       <DataFetch url={dataUrl} />
     </div>
   );

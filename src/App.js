@@ -4,7 +4,7 @@ import DataFetch from "./DataFetch";
 
 export default function App() {
 const actualWeather = [
-    "idema",
+    "código",
     "7002Y",
     "7012C",
     "7023X",
@@ -63,7 +63,6 @@ const actualWeather = [
   const handleChange = (e) => {
     setIdemaCode(e.target.value);
     setIsLoading(true);
-    console.log(idemaCode)
   };
 
   useEffect(() => {

@@ -45,28 +45,32 @@ const DataFetch = (props) => {
         </tr>
         <tr>
           <th>Altitud</th>
-          <td>{apiData.alt} m</td>
+          <td>{apiData.alt ? `${apiData.alt} m` : `-`}</td>
         </tr>
         <tr>
           <th>Precipitación última hora</th>
-          <td>{apiData.prec} mm</td>
+          <td>{apiData.prec || apiData.prec === 0 ? apiData.prec : `-` }</td>
         </tr>
         <tr>
           <th>Velocidad del viento</th>
-          <td>{apiData.vv} m/s</td>
+          <td>{apiData.vv ? `${apiData.vv} m/s` : `-`}</td>
         </tr>
         <tr>
           <th>Dirección del viento</th>
-          <td>{apiData.dv}
-          <sup>o</sup></td>
+          <td>{apiData.dv ? `${apiData.dv}º` : `-`}
+          </td>
         </tr>
         <tr>
           <th>Temperatura del suelo</th>
-          <td>{apiData.ts} <sup>o</sup>C</td>
+          <td>{apiData.ts ? `${apiData.ts}ºC` : `-`}</td>
         </tr>
         <tr>
           <th>Temperatura del aire</th>
-          <td>{apiData.ta} <sup>o</sup>C</td>
+          <td>{apiData.ta ? `${apiData.ta}ºC` : `-`}</td>
+        </tr>
+        <tr>
+          <th>Humedad relativa</th>
+          <td>{apiData.hr ? `${apiData.hr}%` : `-`}</td>
         </tr>
       </table>
     </div>

@@ -3,15 +3,8 @@ import "./App.css";
 import DataFetch from "./DataFetch";
 
 export default function App() {
-  const [isLoading, setIsLoading] = useState(false);
-  const [dataUrl, setDataUrl] = useState(null);
-  const [error, setError] = useState(null);
-  const [idema, setIdema] = useState("");
-  const [idemaCode, setIdemaCode] = useState("");
-  const API_URL = `${process.env.REACT_APP_API_URL}`;
-  const API_KEY = `${process.env.REACT_APP_API_KEY}`;
-
-  const actualWeather = [
+const actualWeather = [
+    "idema",
     "7002Y",
     "7012C",
     "7023X",
@@ -58,14 +51,19 @@ export default function App() {
     "7275C",
   ];
 
-  const submitHandler = () => {
-    setIdemaCode(`${idema}`);
-    setIdema("");
-    setIsLoading(true);
-  };
+  const [isLoading, setIsLoading] = useState(false);
+  const [dataUrl, setDataUrl] = useState(null);
+  const [error, setError] = useState(null);
+  const [idemaCode, setIdemaCode] = useState("");
+  const API_URL = `${process.env.REACT_APP_API_URL}`;
+  const API_KEY = `${process.env.REACT_APP_API_KEY}`;
 
-  const changeHandler = (e) => {
-    setIdema(e.target.value);
+  
+
+  const handleChange = (e) => {
+    setIdemaCode(e.target.value);
+    setIsLoading(true);
+    console.log(idemaCode)
   };
 
   useEffect(() => {
@@ -114,17 +112,12 @@ export default function App() {
   }
   return (
     <div className="App">
-      <form onSubmit={submitHandler}>
-        <label htmlFor="idemaCode">Código IDEMA</label>
-        <input
-          type="text"
-          id="idema"
-          value={idema}
-          onChange={changeHandler}
-          autofocus="true"
-        />
-        <button type="submit">Buscar</button>
-      </form>
+      <label htmlFor="idemaCode">Código IDEMA</label>
+      <select id="idema" name="idema" onChange={e => handleChange(e)}>
+        {actualWeather.map((i) => (
+          <option value={i}>{i}</option>
+        ))}
+      </select>
       <p>{idemaCode}</p>
       <DataFetch url={dataUrl} />
     </div>

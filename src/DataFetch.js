@@ -39,22 +39,40 @@ const DataFetch = (props) => {
   }
   return (
     <div className="DataFetch">
-      <ul>
-        <li>Ubicación: {apiData.ubi}</li>
-        <li>Altitud: {apiData.alt} m</li>
-        <li>Precipitación última hora: {apiData.prec} mm</li>
-        <li>Velocidad del viento: {apiData.vv} m/s</li>
-        <li>
-          Dirección del viento: {apiData.dv}
-          <sup>o</sup>
-        </li>
-        <li>
-          Temperatura del suelo: {apiData.ts} <sup>o</sup>C
-        </li>
-        <li>
-          Temperatura del aire: {apiData.ta} <sup>o</sup>C
-        </li>
-      </ul>
+      <table border={1} width="320px">
+        <tr>
+          <th colSpan={2}>{apiData.ubi}</th>
+        </tr>
+        <tr>
+          <th>Altitud</th>
+          <td>{apiData.alt ? `${apiData.alt} m` : `-`}</td>
+        </tr>
+        <tr>
+          <th>Precipitación última hora</th>
+          <td>{apiData.prec || apiData.prec === 0 ? apiData.prec : `-` }</td>
+        </tr>
+        <tr>
+          <th>Velocidad del viento</th>
+          <td>{apiData.vv ? `${apiData.vv} m/s` : `-`}</td>
+        </tr>
+        <tr>
+          <th>Dirección del viento</th>
+          <td>{apiData.dv ? `${apiData.dv}º` : `-`}
+          </td>
+        </tr>
+        <tr>
+          <th>Temperatura del suelo</th>
+          <td>{apiData.ts ? `${apiData.ts}ºC` : `-`}</td>
+        </tr>
+        <tr>
+          <th>Temperatura del aire</th>
+          <td>{apiData.ta ? `${apiData.ta}ºC` : `-`}</td>
+        </tr>
+        <tr>
+          <th>Humedad relativa</th>
+          <td>{apiData.hr ? `${apiData.hr}%` : `-`}</td>
+        </tr>
+      </table>
     </div>
   );
 };

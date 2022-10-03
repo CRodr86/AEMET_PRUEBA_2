@@ -3,22 +3,66 @@ import "./App.css";
 import DataFetch from "./DataFetch";
 
 export default function App() {
+const actualWeather = [
+    "código",
+    "7002Y",
+    "7012C",
+    "7023X",
+    "7026X",
+    "7031X",
+    "7066Y",
+    "7072Y",
+    "7080X",
+    "7096B",
+    "7103Y",
+    "7119B",
+    "7121A",
+    "7127X",
+    "7138B",
+    "7145D",
+    "7158X",
+    "7172X",
+    "7178I",
+    "7195X",
+    "7203A",
+    "7209",
+    "7211B",
+    "7227X",
+    "7237E",
+    "7244X",
+    "7247X",
+    "7250C",
+    "7261X",
+    "7275C",
+  ];
+
+  const especificDayWeather = [
+    "7002Y",
+    "7012C",
+    "7031",
+    "7031X",
+    "7096B",
+    "7119B",
+    "7145D",
+    "7178I",
+    "7209",
+    "7228",
+    "7247X",
+    "7275C",
+  ];
+
   const [isLoading, setIsLoading] = useState(false);
   const [dataUrl, setDataUrl] = useState(null);
   const [error, setError] = useState(null);
-  const [idema, setIdema] = useState("");
   const [idemaCode, setIdemaCode] = useState("");
   const API_URL = `${process.env.REACT_APP_API_URL}`;
   const API_KEY = `${process.env.REACT_APP_API_KEY}`;
 
-  const submitHandler = () => {
-    setIdemaCode(`${idema}`);
-    setIdema("");
-    setIsLoading(true);
-  };
+  
 
-  const changeHandler = (e) => {
-    setIdema(e.target.value);
+  const handleChange = (e) => {
+    setIdemaCode(e.target.value);
+    setIsLoading(true);
   };
 
   useEffect(() => {
@@ -67,17 +111,12 @@ export default function App() {
   }
   return (
     <div className="App">
-      <form onSubmit={submitHandler}>
-        <label htmlFor="idemaCode">Código IDEMA</label>
-        <input
-          type="text"
-          id="idema"
-          value={idema}
-          onChange={changeHandler}
-          autofocus="true"
-        />
-        <button type="submit">Buscar</button>
-      </form>
+      <label htmlFor="idemaCode">Código IDEMA</label>
+      <select id="idema" name="idema" onChange={e => handleChange(e)}>
+        {actualWeather.map((i) => (
+          <option value={i}>{i}</option>
+        ))}
+      </select>
       <p>{idemaCode}</p>
       <DataFetch url={dataUrl} />
     </div>
